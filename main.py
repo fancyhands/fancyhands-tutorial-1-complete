@@ -91,11 +91,11 @@ class PrankModel(db.Model):
 		return prank
 
 class CallbackHandler(webapp2.RequestHandler):
-	def post(self):
-		callback = dict(urlparse.parse_qsl(self.request.body))
-		callback_to_model(callback)
+    def post(self):
+      callback = dict(urlparse.parse_qsl(self.request.body))
+      PrankModel.create_from_callback(callback)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/callback', CallbackHandler),
+    ('/callback/?', CallbackHandler),
 ], debug=True)

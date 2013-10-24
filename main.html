@@ -1,32 +1,36 @@
 <html>
 	<head>
 		<title>Prank Caller</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
 	</head>
-
 	<body>
-		{% if prank %}
+		<div class="wrapper">
+			<h1>Prank Caller</h1>
 
-			{{ prank.title }}<br>
-			{{ prank.content }}<br>
-			{{ prank.status }}<br>
+			{% if prank %}
+			<div class="prank">
+				<h2>{{ prank.title }}</h2>
+				<p>{{ prank.content }}</p>
+				<h5><span>{{ prank.status }}</span></h5>
+			</div>
+				{% if prank.status == 'Closed' %}
+					<form id="submit-form" method=POST>
+						<h3>New Prank?</h3>
+						<input type="tel" placeholder="Phone number" name="phone-number" required>
+						<textarea placeholder="Prank..." name="prank-text" required></textarea>
+						<button type="submit">Submit</button>
+					</form>
+				{% endif %}
 
-			{% if prank.status == 'Closed' %}
-				New Prank?
-				<form id="submit-form" method=POST>
-					<input type="text" name="phone-number">
-					<input type="text" name="prank-text">
+			{% else %}
+
+				<form method=POST>
+					<input type="tel" placeholder="Phone number" name="phone-number" required>
+					<textarea placeholder="Prank..." name="prank-text" required></textarea>
 					<button type="submit">Submit</button>
 				</form>
+
 			{% endif %}
-
-		{% else %}
-
-			<form method=POST>
-				<input type="text" name="phone-number">
-				<input type="text" name="prank-text">
-				<button type="submit">Submit</button>
-			</form>
-
-		{% endif %}
+		</div>
 	</body>
 </html>

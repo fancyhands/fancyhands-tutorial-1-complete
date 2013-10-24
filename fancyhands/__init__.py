@@ -1,4 +1,5 @@
 from urllib import urlencode
+from datetime import datetime
 import oauth2 as oauth
 import json
 
@@ -53,7 +54,7 @@ class FancyhandsClient(object):
 			'title': title,
 			'description': description,
 			'bid': bid,
-			'expiration_date': expiration_date,
+			'expiration_date': expiration_date.strftime('%Y-%m-%dT%H:%M:%SZ'),
 			'custom_fields': json.dumps(custom_fields),
 			'test':test,
 		}

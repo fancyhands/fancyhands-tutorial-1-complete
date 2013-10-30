@@ -29,8 +29,8 @@ class MainHandler(webapp2.RequestHandler):
 		prank_text = self.request.get('prank-text')
 
 		# Set your Fancy Hands API Key and Secret here
-		api_key = 'kBhPqrikcj57ITo'
-		secret = 'tOY0cVRHcMKm3EO'
+		api_key = '<API KEY>'
+		secret = '<API SECRET>'
 
 		# Setup the Fancy Hands Client
 		client = FancyhandsClient(api_key, secret)
@@ -38,7 +38,7 @@ class MainHandler(webapp2.RequestHandler):
 		title = 'Prank Call - %s' % phone_number
 		description = prank_text
 		bid = 4.0
-		expiration_date = datetime.now() + timedelta(1)).strftime('%Y-%m-%dT10:09:08Z')
+		expiration_date = datetime.now() + timedelta(1).strftime('%Y-%m-%dT10:09:08Z')
 
 		# Build custom form data
 		custom_fields = []
@@ -73,7 +73,7 @@ class PrankModel(db.Model):
 
     @classmethod
     def create_from_callback(self, callback):
-    	prank = PrankModel.all().filter('fh_key =', callback['key']).get()
+		prank = PrankModel.all().filter('fh_key =', callback['key']).get()
 
 		if prank:
 			prank.status = callback['status']
